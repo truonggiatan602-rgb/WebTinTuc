@@ -7,29 +7,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thời Trang & Phong Cách - Báo Đời Sống</title>
+    <title>Thời Trang - Báo Đời Sống</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        header {
+            background: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+            header h1 {
+                font-size: 24px;
+                font-weight: bold;
+                color: #007acc;
+            }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            font-weight: bold;
+        }
+
+        .trending {
+            background: #111;
+            color: #fff;
+            padding: 10px 30px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .main-content {
+            background: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .featured-article {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+            .featured-article img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .featured-article .overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.7);
+                color: #fff;
+                padding: 20px;
+            }
+
+            .featured-article h2 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .featured-article p {
+                font-size: 14px;
+                opacity: 0.9;
+            }
+
+        .article-list {
             padding: 20px;
         }
 
-        h1 {
-            color: #cc007a;
+        .article-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
         }
-        .back-link {
-            margin-top: 20px;
-            display: block;
+
+            .article-item:last-child {
+                border-bottom: none;
+            }
+
+            .article-item img {
+                width: 120px;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+
+            .article-item .content h3 {
+                font-size: 16px;
+                margin-bottom: 8px;
+                color: #333;
+            }
+
+            .article-item .content p {
+                font-size: 13px;
+                color: #666;
+                line-height: 1.4;
+            }
+
+        .sidebar {
+            background: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            height: fit-content;
+        }
+
+            .sidebar h3 {
+                margin-bottom: 15px;
+                border-bottom: 2px solid #007acc;
+                padding-bottom: 5px;
+                color: #007acc;
+            }
+
+        .sidebar-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+            .sidebar-item:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .sidebar-item img {
+                width: 60px;
+                height: 45px;
+                object-fit: cover;
+                border-radius: 3px;
+            }
+
+            .sidebar-item .content h4 {
+                font-size: 13px;
+                line-height: 1.3;
+                margin-bottom: 5px;
+            }
+
+            .sidebar-item .content span {
+                font-size: 11px;
+                color: #999;
+            }
+
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        @@media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Thời Trang & Phong Cách</h1>
-    <p>Cập nhật những xu hướng thời trang mới nhất, mẹo phối đồ và các bộ sưu tập nổi bật từ khắp nơi trên thế giới.</p>
+    <header>
+        <h1>BÁO ĐỜI SỐNG</h1>
+        <nav>
+            <ul>
+                <li><a href="http://localhost:57919/Home/TinTuc">Tin Tức</a></li>
+                <li><a href="http://localhost:57919/Home/ThoiTrang">Thời Trang</a></li>
+                <li><a href="http://localhost:57919/Home/TienIch">Tiện ích</a></li>
+                <li><a href="http://localhost:57919/Home/LoiSong">Lối Sống</a></li>
+                <li><a href="http://localhost:57919/Home/DuLich">Du lịch</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <h2>Xu hướng màu sắc mùa Hè 2025</h2>
-    <p>Các tông màu neon và pastel đang thống trị sàn diễn năm nay...</p>
+    <div class="trending">
+        Xu hướng thời trang: Màu sắc neon và phong cách tối giản đang thống trị mùa hè 2025
+    </div>
 
-    <a href="http://localhost:57919/Home/WebTinTuc" class="back-link">← Quay lại trang chủ</a>
+    <div class="container">
+        <div class="main-content">
+            <div class="featured-article">
+                <img src="https://picsum.photos/id/659/800/400" alt="Fashion Main">
+                <div class="overlay">
+                    <h2>Adriana Lima 'mặc như không' diễn show Victoria's Secret</h2>
+                    <p>NEW YORK - "Thiên thần" Adriana Lima diện trang phục màu da, trình diễn nội y bên dàn người đẹp Victoria's Secret 2025.</p>
+                </div>
+            </div>
+
+            <div class="article-list">
+                <div class="article-item">
+                    <img src="https://picsum.photos/id/337/120/80" alt="">
+                    <div class="content">
+                        <h3>'Mỹ nhân đẹp nhất Philippines' diện vedette show nhà thiết kế Việt</h3>
+                        <p>Marian Rivera - "sao đẹp nhất Philippines" - làm đại cát-xê trên sàn diễn TP HCM giữ vị trí kết màn show thời trang của thiết kế Trà Linh.</p>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <img src="https://picsum.photos/id/584/120/80" alt="">
+                    <div class="content">
+                        <h3>Vợ tỷ phú giàu nhất châu Á xách túi định 3.000 viên kim cương</h3>
+                        <p>Bà Nita Ambani, vợ tỷ phú Ấn Độ Mukesh Ambani, xách túi Hermès đính 3.025 viên kim cương, xa xỉ bậc nhất thế giới.</p>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <img src="https://picsum.photos/id/629/120/80" alt="">
+                    <div class="content">
+                        <h3>Áo dài 'Thanh Bình hỷ lạc' của vợ chồng Đỗ Thị Hà</h3>
+                        <p>THÀNH PHỐ HỒ CHÍ MINH - Hoa hậu Đỗ Thị Hà và chồng doanh nhân cùng diện áo dài "Thanh Bình hỷ lạc", lấy cảm hứng từ quê hương của cô ấy.</p>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <img src="https://picsum.photos/id/738/120/80" alt="">
+                    <div class="content">
+                        <h3>Sơn Tùng M-TP theo đuổi một quân tụt</h3>
+                        <p>Ca sĩ Sơn Tùng M-TP thường mặc một quân tụt, thể hiện phong cách phong phú trong các sự kiện gần đây.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <h3>Tin nổi bật</h3>
+
+            <div class="sidebar-item">
+                <img src="https://picsum.photos/id/394/60/45" alt="">
+                <div class="content">
+                    <h4>Siêu đủ truyền chớp hơn 4.000 hành khách cập cảng Chân Mây</h4>
+                    <span>2 giờ trước</span>
+                </div>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://picsum.photos/id/455/60/45" alt="">
+                <div class="content">
+                    <h4>Trốn trai nhỏ biết tại mở khóa</h4>
+                    <span>3 giờ trước</span>
+                </div>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://picsum.photos/id/523/60/45" alt="">
+                <div class="content">
+                    <h4>Đọa 'chọc bút vào mắt' nữ bác sĩ - bảo lục số blouse trắng</h4>
+                    <span>4 giờ trước</span>
+                </div>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://picsum.photos/id/617/60/45" alt="">
+                <div class="content">
+                    <h4>Lượng CO2 toàn cầu đạt mức cao kỷ lục</h4>
+                    <span>5 giờ trước</span>
+                </div>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://picsum.photos/id/738/60/45" alt="">
+                <div class="content">
+                    <h4>Lũ lụt cuốn trôi nhà cửa, ôtô ở Mexico</h4>
+                    <span>6 giờ trước</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Báo Đời Sống - All Rights Reserved</p>
+    </footer>
 </body>
 </html>
