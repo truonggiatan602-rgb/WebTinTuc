@@ -7,29 +7,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lối Sống & Sức Khỏe - Báo Đời Sống</title>
+    <title>Du Lịch Khám Phá - Báo Đời Sống</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        header {
+            background: #fff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+            header h1 {
+                font-size: 24px;
+                font-weight: bold;
+                color: #007acc;
+            }
+
+        nav ul {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            font-weight: bold;
+        }
+
+        .trending {
+            background: #111;
+            color: #fff;
+            padding: 10px 30px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .container {
+            width: 90%;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .main-content {
+            background: #fff;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .featured-article {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+            .featured-article img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .featured-article .overlay {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.7);
+                color: #fff;
+                padding: 20px;
+            }
+
+            .featured-article h2 {
+                font-size: 24px;
+                margin-bottom: 10px;
+            }
+
+            .featured-article p {
+                font-size: 14px;
+                opacity: 0.9;
+            }
+
+        .article-list {
             padding: 20px;
         }
 
-        h1 {
-            color: #ac7c00;
+        .article-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
         }
-        .back-link {
-            margin-top: 20px;
-            display: block;
+
+            .article-item:last-child {
+                border-bottom: none;
+            }
+
+            .article-item img {
+                width: 120px;
+                height: 80px;
+                object-fit: cover;
+                border-radius: 5px;
+            }
+
+            .article-item .content h3 {
+                font-size: 16px;
+                margin-bottom: 8px;
+                color: #333;
+            }
+
+            .article-item .content p {
+                font-size: 13px;
+                color: #666;
+                line-height: 1.4;
+            }
+
+        .sidebar {
+            background: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            height: fit-content;
+        }
+
+            .sidebar h3 {
+                margin-bottom: 15px;
+                border-bottom: 2px solid #007acc;
+                padding-bottom: 5px;
+                color: #007acc;
+            }
+
+        .sidebar-item {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+            .sidebar-item:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+
+            .sidebar-item img {
+                width: 60px;
+                height: 45px;
+                object-fit: cover;
+                border-radius: 3px;
+            }
+
+            .sidebar-item .content h4 {
+                font-size: 13px;
+                line-height: 1.3;
+                margin-bottom: 5px;
+            }
+
+            .sidebar-item .content span {
+                font-size: 11px;
+                color: #999;
+            }
+
+        footer {
+            background: #222;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        @@media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <h1>Lối Sống & Sức Khỏe</h1>
-    <p>Các bài viết về cách cải thiện chất lượng cuộc sống, dinh dưỡng, tập luyện và sức khỏe tinh thần.</p>
+    <header>
+        <h1>BÁO ĐỜI SỐNG</h1>
+        <nav>
+            <ul>
+                <li><a href="http://localhost:57919/Home/TinTuc">Tin Tức</a></li>
+                <li><a href="http://localhost:57919/Home/ThoiTrang">Thời Trang</a></li>
+                <li><a href="http://localhost:57919/Home/TienIch">Tiện ích</a></li>
+                <li><a href="http://localhost:57919/Home/LoiSong">Lối Sống</a></li>
+                <li><a href="http://localhost:57919/Home/DuLich">Du lịch</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <h2>Bí quyết ngủ ngon: 5 bước đơn giản</h2>
-    <p>Thiết lập thói quen trước khi ngủ giúp bạn có một giấc ngủ sâu và trọn vẹn...</p>
+    <div class="trending">
+        Xu hướng lối sống: Chữa lành tâm hồn.
+    </div>
 
-    <a href="http://localhost:57919/Home/WebTinTuc" class="back-link">← Quay lại trang chủ</a>
+    <div class="container">
+        <div class="main-content">
+            <div class="featured-article">
+                <img src="https://i1-giadinh.vnecdn.net/2025/10/17/556787396-844136561467089-5902-7680-7663-1760669422.jpg?w=680&h=408&q=100&dpr=2&fit=crop&s=XVbmp6qJ5ETUx3iW7C7bqQ" alt="Fashion Main">
+                <div class="overlay">
+                    <h2>Bộ mặt thật của 'bạn trai tận tụy nhất Trung Quốc'</h2>
+                    <p>Tỉnh dậy sau nhiều tháng hôn mê, cô gái 20 tuổi ở Liêu Ninh tố người bạn trai từng được truyền thông ca ngợi, thực chất là kẻ đã bạo hành, đánh cô chấn thương não.</p>
+                </div>
+            </div>
+
+            <div class="article-list">
+                <div class="article-item">
+                    <img src="https://i1-dulich.vnecdn.net/2025/10/15/image1299213090extractword0out-756833-1760521551.jpeg?w=300&h=180&q=100&dpr=2&fit=crop&s=enFSSWXpudzo05k9lU1qOA" alt="">
+                    <div class="content">
+                        <h3>'Nhiều hoạt động dịp 20/10 tại The Grand Ho Tram </h3>
+                        <p>The Grand Ho Tram mang đến không gian nghỉ dưỡng sang trọng cùng ưu đãi cho chuỗi hoạt động yoga, pickleball, trải nghiệm ẩm thực... phù hợp cho phái đẹp và gia đình dịp 20/10.</p>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <img src="https://i1-dulich.vnecdn.net/2025/10/16/cambodia-1760614929-4725-17606-4237-9359-1760615025.jpg?w=300&h=180&q=100&dpr=2&fit=crop&s=TowFDdVSs99_VpqFZu3Z6A" alt="">
+                    <div class="content">
+                        <h3>Hàn Quốc cấm công dân du lịch đến ba khu vực ở Campuchia</h3>
+                        <p>Hàn Quốc phát cảnh báo cấm du lịch tới ba khu vực ở Campuchia, trong bối cảnh nhiều công dân nước này mất tích, bị giam giữ trái phép.</p>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <img src="https://i1-dulich.vnecdn.net/2025/10/16/6c6a7ce5-0583-4277-8cbc-046edb-9457-7804-1760592106.jpg?w=300&h=180&q=100&dpr=2&fit=crop&s=lyp4YT_hMLZVXJ-XEeohPw" alt="">
+                    <div class="content">
+                        <h3>Khách Tây đi 'tour dọn dẹp sau lũ' ở Thái Nguyên</h3>
+                        <p>Thay vì đi tham quan, hai du khách người Hà Lan và Mỹ cùng hướng dẫn viên đã tham gia "tour dọn bùn sau lũ" tại một gia đình ở trung tâm thành phố.</p>
+                    </div>
+                </div>
+
+                <div class="article-item">
+                    <img src="https://i1-dulich.vnecdn.net/2025/10/15/Image-ExtractWord-1-Out-6557-1760527872.png?w=300&h=180&q=100&dpr=2&fit=crop&s=4R7O-LO-460gspuTl-zC5g" alt="">
+                    <div class="content">
+                        <h3>Nghỉ dưỡng sang trọng ven biển tại Prince Hotel Đà Nẵng </h3>
+                        <p>Prince Hotel Đà Nẵng là khách sạn mới của Seibu Prince Hotels & Resorts, mang đến nhiều trải nghiệm nghỉ dưỡng cao cấp, tiện nghi hiện đại, vị trí thuận tiện.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <h3>Tin nổi bật</h3>
+
+            <div class="sidebar-item">
+                <img src="https://i1-dulich.vnecdn.net/2025/10/15/e1ede21bb8b1fc0f198ea60ed9b924-8457-1524-1760514845.png?w=300&h=180&q=100&dpr=2&fit=crop&s=m0L18NynNBmtHA3-r44pVQ" alt="">
+                <div class="content">
+                    <h4>Lý do nhiều khách sạn Trung Quốc không nhận khách nước ngoài </h4>
+                    <span>2 giờ trước</span>
+                </div>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://i1-dulich.vnecdn.net/2025/10/13/cualong1-1760349461-1760349506-9420-1760349977.jpg?w=240&h=144&q=100&dpr=2&fit=crop&s=4dCG-OQ9weJvzpAgLRhqfQ" alt="">
+                <div class="content">
+                    <h4>Thưởng thức cua lông Thượng Hải theo cách quý tộc</h4>
+                    <span>3 giờ trước</span>
+                </div>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://i1-dulich.vnecdn.net/2025/10/15/la-do-1760516408-1760516436-2967-1760517201.jpg?w=240&h=144&q=100&dpr=2&fit=crop&s=DXSJx1HcoCLEvX-fINewFQ" alt="">
+                <div class="content">
+                    <h4>Lịch ngắm lá vàng lá đỏ Hàn Quốc mùa thu 2025</h4>
+                    <span>4 giờ trước</span>
+                </div>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://i1-dulich.vnecdn.net/2025/10/16/anansaigon13JPG168645028118680-3379-8414-1760607300.jpg?w=240&h=144&q=100&dpr=2&fit=crop&s=4ADvZ8n2Q-pnfM0EaPEMfA" alt="">
+                <div class="content">
+                    <h4>Ẩm thực Việt là 'ngôi sao' mới nổi trên thế giới</h4>
+                    <span>5 giờ trước</span>
+                </div>
+            </div>
+
+            <div class="sidebar-item">
+                <img src="https://i1-dulich.vnecdn.net/2025/10/15/ca-i-me-p-1760542682-176054270-8404-8803-1760542729.jpg?w=240&h=144&q=100&dpr=2&fit=crop&s=EaqvZwxFrJ4xDXNfeNHcLg" alt="">
+                <div class="content">
+                    <h4>TP HCM đối mặt nguy cơ mất khách du lịch từ tàu biển quốc tế</h4>
+                    <span>6 giờ trước</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2025 Báo Đời Sống - All Rights Reserved</p>
+        <a href="http://localhost:57919/Home/WebTinTuc" class="back-link">← Quay lại trang chủ</a>
+    </footer>
 </body>
 </html>
