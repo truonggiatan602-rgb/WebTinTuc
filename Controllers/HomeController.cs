@@ -26,7 +26,7 @@ namespace WebTinTuc.Controllers
 
             return View();
         }
-        public ActionResult WebTinTuc()
+        public ActionResult TrangChu()
         {
             return View();
         }

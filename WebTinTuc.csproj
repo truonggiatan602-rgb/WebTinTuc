@@ -175,7 +175,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\WebTinTuc.cshtml" />
+    <Content Include="Views\Home\TrangChu.cshtml" />
     <Content Include="Views\Home\TinTuc.cshtml" />
     <Content Include="Views\Home\ThoiTrang.cshtml" />
     <Content Include="Views\Home\TienIch.cshtml" />
