@@ -1,33 +1,84 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model IEnumerable<WebTinTuc.Article>
+
+@{
+    ViewBag.Title = "Trang Chủ";
+
+    // LOGIC TÁCH TIN:
+    // 1. Lấy bài mới nhất làm "Tin Nổi Bật" (Featured)
+    var featureNews = Model != null ? Model.FirstOrDefault() : null;
+
+    // 2. Lấy 3 bài tiếp theo làm "Tin Phụ" (Sub Stories)
+    var subNews = Model != null ? Model.Skip(1).Take(3).ToList() : new List<WebTinTuc.Article>();
 }
 
-<main>
-    <section class="row" aria-labelledby="aspnetTitle">
-        <h1 id="title">ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-md">Learn more &raquo;</a></p>
-    </section>
+<!-- KHUNG BAO NGOÀI (Quan trọng: Class này set độ rộng 1000px như báo VnExpress) -->
+<div class="content-container">
 
-    <div class="row">
-        <section class="col-md-4" aria-labelledby="gettingStartedTitle">
-            <h2 id="gettingStartedTitle">Getting started</h2>
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <!-- PHẦN 1: TIN NỔI BẬT (Ảnh to bên trái, chữ bên phải) -->
+    @if (featureNews != null)
+    {
+        <section class="featured-story">
+            <div class="story-image">
+                <a href="@Url.Action("Details", "Home", new { id = featureNews.ArticleID })">
+                    <!-- Ảnh tin lớn (Có xử lý ảnh lỗi bằng ảnh mẫu) -->
+                    <img src="@featureNews.ImageURL"
+                         alt="@featureNews.Title"
+                         onerror="this.src='https://via.placeholder.com/800x500?text=No+Image+Available'">
+                </a>
+            </div>
+
+            <div class="story-content">
+                <h1 class="story-title">
+                    <a href="@Url.Action("Details", "Home", new { id = featureNews.ArticleID })">
+                        @featureNews.Title
+                    </a>
+                </h1>
+
+                <p class="story-sapo">
+                    <!-- Giả lập Sapo (Đoạn trích dẫn) bằng cách lấy 250 ký tự đầu -->
+                    @if (!string.IsNullOrEmpty(featureNews.Content) && featureNews.Content.Length > 250)
+                    {
+                        @featureNews.Content.Substring(0, 250)<span>...</span>
+                    }
+                    else
+                    {
+                        @featureNews.Content
+                    }
+                </p>
+            </div>
         </section>
-        <section class="col-md-4" aria-labelledby="librariesTitle">
-            <h2 id="librariesTitle">Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    }
+    else
+    {
+        <!-- Thông báo nếu chưa có bài nào trong DB -->
+        <div class="alert alert-warning text-center" style="margin: 20px;">
+            <h3>Chưa có bài viết nào. Hãy vào trang Admin để đăng bài mới!</h3>
+        </div>
+    }
+
+    <!-- Đường kẻ phân cách mờ -->
+    <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
+
+    <!-- PHẦN 2: 3 TIN PHỤ BÊN DƯỚI (Xếp ngang hàng) -->
+    @if (subNews.Any())
+    {
+        <section class="sub-stories-grid">
+            @foreach (var item in subNews)
+            {
+                <article class="sub-story-item">
+                    <a href="@Url.Action("Details", "Home", new { id = item.ArticleID })">
+                        <img src="@item.ImageURL"
+                             alt="@item.Title"
+                             onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                    </a>
+                    <h3>
+                        <a href="@Url.Action("Details", "Home", new { id = item.ArticleID })">
+                            <!-- Cắt ngắn tiêu đề nếu quá dài để không bị vỡ giao diện -->
+                            @(item.Title.Length > 70 ? item.Title.Substring(0, 70) + "..." : item.Title)
+                        </a>
+                    </h3>
+                </article>
+            }
         </section>
-        <section class="col-md-4" aria-labelledby="hostingTitle">
-            <h2 id="hostingTitle">Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-outline-dark" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-        </section>
-    </div>
-</main>
+    }
+</div>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebTinTuc.User>
+
+@{ ViewBag.Title = "Quản lý tài khoản"; Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml"; }
+
+<h2>Danh sách tài khoản</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Username</th>
+        <th>Vai trò (Role)</th>
+        <th>Hành động</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <!-- Hiển thị Username -->
+            <td class="align-middle">@item.Username</td>
+
+            <!-- Hiển thị Role với logic kiểm tra kỹ -->
+            <td class="align-middle">
+                @if (item.UserRole == "Admin" || item.UserRole == "A")
+                {
+                    <span class="badge badge-danger p-2" style="color: black">Quản trị viên (Admin)</span>
+                }
+                else
+                {
+                    <!-- Nếu không phải Admin thì mặc định là User -->
+                    <span class="badge badge-primary p-2" style="color: black">Người dùng (User)</span>
+
+                    <!-- (Debug) Dòng này để hiện giá trị thực trong DB nếu badge không hiện -->
+                    <small class="d-block text-muted mt-1">Mã: @item.UserRole</small>
+                }
+            </td>
+
+            <!-- Nút hành động -->
+            <td class="text-center align-middle">
+                @Html.ActionLink("Phân quyền", "EditRole", new { username = item.Username }, new { @class = "btn btn-sm btn-warning shadow-sm" })
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+        </div>
+    </div>
+</div>
+
+<!-- Nếu danh sách trống -->
+@if (Model.Count() == 0)
+{
+    <div class="alert alert-warning text-center">Chưa có tài khoản nào trong hệ thống.</div>
+}

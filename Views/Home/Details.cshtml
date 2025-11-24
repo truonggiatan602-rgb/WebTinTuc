@@ -1,0 +1,44 @@
+﻿@model WebTinTuc.Article
+
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <!-- Tiêu đề bài báo -->
+            <h1 class="fw-bold text-primary mb-3">@Model.Title</h1>
+
+            <!-- Thông tin ngày đăng / Tác giả -->
+            <div class="text-muted mb-4 border-bottom pb-2">
+                <small>
+                    <i class="fa fa-calendar"></i> @(Model.PublishDate != DateTime.MinValue ? Model.PublishDate.ToString("dd/MM/yyyy") : "")
+                    &nbsp;|&nbsp;
+                    <i class="fa fa-eye"></i> Lượt xem: @Model.ViewCount
+                </small>
+            </div>
+
+            <!-- Hình ảnh minh họa -->
+            @if (!string.IsNullOrEmpty(Model.ImageURL))
+            {
+                <div class="text-center mb-4">
+                    <img src="@Model.ImageURL" class="img-fluid rounded shadow" style="max-height: 500px;" alt="@Model.Title">
+                </div>
+            }
+
+            <!-- Nội dung bài viết -->
+            <div class="article-content lead text-justify" style="font-size: 1.1rem; line-height: 1.8;">
+                <!-- Dùng white-space: pre-line để giữ xuống dòng từ database -->
+                <p style="white-space: pre-line;">@Model.Content</p>
+            </div>
+
+            <div class="mt-5 mb-5">
+                <a href="@Url.Action("Index", "Home")" class="btn btn-outline-secondary">
+                    <i class="fa fa-arrow-left"></i> Quay lại trang chủ
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

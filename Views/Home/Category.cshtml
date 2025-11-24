@@ -1,0 +1,52 @@
+﻿@model IEnumerable<WebTinTuc.Article>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-container">
+
+    <!-- Tiêu đề danh mục -->
+    <div style="border-bottom: 2px solid #a00; margin-bottom: 20px; padding-bottom: 10px;">
+        <h2 style="color: #a00; font-weight: 700; margin: 0; text-transform: uppercase;">
+            @ViewBag.Title
+        </h2>
+    </div>
+
+    @if (Model.Any())
+    {
+        <!-- Hiển thị danh sách bài viết -->
+        <section class="sub-stories-grid" style="flex-wrap: wrap;">
+            @* Thêm flex-wrap để nếu nhiều bài quá nó tự xuống dòng *@
+
+            @foreach (var item in Model)
+            {
+                <article class="sub-story-item" style="flex: 0 0 30%; margin-bottom: 20px;">
+                    <!-- Chỉnh style một chút để chia 3 cột -->
+
+                    <a href="@Url.Action("Details", "Home", new { id = item.ArticleID })">
+                        <img src="@item.ImageURL"
+                             alt="@item.Title"
+                             onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'"
+                             style="height: 180px; object-fit: cover;">
+                    </a>
+                    <h3 style="margin-top: 10px;">
+                        <a href="@Url.Action("Details", "Home", new { id = item.ArticleID })">
+                            @(item.Title.Length > 60 ? item.Title.Substring(0, 60) + "..." : item.Title)
+                        </a>
+                    </h3>
+                    <!-- Hiện thêm đoạn tóm tắt ngắn -->
+                    <p style="font-size: 13px; color: #666; margin-top: 5px;">
+                        @(item.Content != null && item.Content.Length > 80 ? item.Content.Substring(0, 80) + "..." : item.Content)
+                    </p>
+                </article>
+            }
+        </section>
+    }
+    else
+    {
+        <div class="alert alert-info text-center">
+            Hiện chưa có bài viết nào trong mục này.
+        </div>
+    }
+</div>

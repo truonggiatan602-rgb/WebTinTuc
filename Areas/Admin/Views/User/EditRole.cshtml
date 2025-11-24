@@ -1,0 +1,44 @@
+﻿@model WebTinTuc.User
+@{
+    ViewBag.Title = "EditRole";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Cấp quyền cho tài khoản: <span class="text-danger">@Model.Username</span></h2>
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <!-- Giữ Username để gửi về Controller (PK) -->
+            @Html.HiddenFor(model => model.Username)
+
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group">
+                    <label class="control-label font-weight-bold">Chọn vai trò mới:</label>
+
+                    <!-- Tạo Dropdown đơn giản để chọn Admin hoặc User -->
+                    @Html.DropDownListFor(model => model.UserRole, new List<SelectListItem>
+                    {
+                        new SelectListItem { Text = "Người dùng (User)", Value = "User" },
+                        new SelectListItem { Text = "Quản trị viên (Admin)", Value = "Admin" }
+                    }, new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.UserRole, "", new { @class = "text-danger" })
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+                    @Html.ActionLink("Quay lại danh sách", "Index", null, new { @class = "btn btn-secondary ml-2" })
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

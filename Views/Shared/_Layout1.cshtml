@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - WebTinTucZ</title>
+    @* Giữ lại liên kết CSS hiện tại (Site.css sẽ nằm trong đây) *@
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @* Thêm font Roboto để giống VnExpress *@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    @* Bắt đầu cấu trúc Header kiểu VnExpress *@
+    <header class="main-header">
+        <div class="top-bar-container">
+            <div class="logo">
+                <a href="@Url.Action("Index", "Home")" class="logo-link">
+                    <span class="logo-text">BÁO<span class="red"> ĐỜI SỐNG</span></span>
+                    <p class="tagline">Nhiều Thông Tin Bổ Ích Cho Đời Sống</p></a>
+            </div>
+
+            @* Thanh thông tin Ngày tháng *@
+            <div class="info-bar">
+                <span class="info-item date-time" id="current-date">Thứ sáu, 21/11/2025</span>
+                <span class="info-item auth-links">Đăng nhập | International</span>
+            </div>
+        </div>
+
+        <div class="main-nav-bar-wrapper">
+            @* Thanh Menu Chính Responsive *@
+            <nav class="main-nav-bar">
+                <ul class="nav-list" id="navList">
+                    <li class="nav-item home-icon"><a href="@Url.Action("Index", "Home")">🏠 NTS-OK</a></li>
+                    <li class="nav-item active"><a href="#">Thời sự</a></li>
+                    <li class="nav-item"><a href="#">Thế giới</a></li>
+                    <li class="nav-item"><a href="#">Sức khỏe</a></li>
+                    <li class="nav-item"><a href="#">Thể thao</a></li>
+                    <li class="nav-item"><a href="#">Du lịch</a></li>
+                </ul>
+                <div class="nav-scroll-indicator" id="navScrollRight"><span>&gt;</span></div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <div class="footer-container">
+                <div class="footer-top-bar">
+                    <div class="footer-logo">
+                        Báo Điện Tử  | <span class="logo-text">BÁO<span class="red"> ĐỜI SỐNG</span></span> |
+                                    <span class="social-icons">
+                                        <a href="https://www.facebook.com/" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                        <a href="https://www.x.com/" target="_blank" title="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
+                                        <a href="https://www.youtube.com/" target="_blank" title="YouTube"><i class="fab fa-youtube"></i></a>
+                                        <a href="https://www.tiktok.com/" target="_blank" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                                    </span>
+                    </div>
+
+                <hr class="footer-hr">
+
+                <div class="footer-info">
+                    <div class="info-column license">
+                        <p><strong>BÁO ĐỜI SỐNG – Tin nhanh, chuẩn xác, vì cộng đồng.</strong></p>
+                    </div>
+                    <div class="info-column contact">
+                        <p>Tổng biên tập: NTS = Nguyên, Tân, Sang</p>
+                        <p>Địa chỉ: 828 Sư Vạn Hạnh, Phường Hòa hưng, Quận 10, Thành Phố Hồ Chí Minh</p>
+                        <p>Email: banbientap@baodoisong.vn</p>
+                    </div>
+                    <div class="info-column copyright">
+                        <p>&copy;@DateTime.Now.Year. Báo Đời Sống</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @* THÊM LINK FILE JS TÙY CHỈNH *@
+    <script src="~/Scripts/main.js"></script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

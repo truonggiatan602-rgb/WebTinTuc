@@ -1,20 +1,343 @@
-﻿/* Set padding to keep content from hitting the edges */
-.body-content {
-    margin-top: 15px;
-    padding-left: 15px;
+﻿/* ==================================================================== */
+/* CÁC THIẾT LẬP CHUNG */
+/* ==================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f6f6f6;
+    color: #222;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Thay thế .container Bootstrap để đảm bảo chiều rộng chuẩn 1000px */
+.content-container, .top-bar-container {
+    width: 1000px;
+    max-width: 95%;
+    margin: 0 auto;
+}
+
+.content-container {
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+/* --- 1. HEADER & TOP BAR --- */
+.main-header {
+    background-color: #fff;
+}
+
+.top-bar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.logo-text {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+    .logo-text .red {
+        color: #a00;
+    }
+
+.tagline {
+    font-size: 11px;
+    color: #666;
+    margin-top: -5px;
+}
+
+.info-bar {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    color: #666;
+    gap: 15px;
+}
+
+.info-item {
     padding-right: 15px;
+    border-right: 1px solid #eee;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+    .info-item:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
+
+/* --- 2. THANH MENU (NAVIGATION BAR) --- */
+.main-nav-bar {
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    display: flex;
+    background-color: #fff;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.main-nav-bar-wrapper {
+    width: 1000px;
+    max-width: 95%;
+    margin: 0 auto;
+    display: flex;
+    width: 100%;
 }
+
+.nav-list {
+    white-space: nowrap;
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+    flex: 1;
+    scrollbar-width: none;
+    display: flex; /* Bắt buộc để các mục nằm ngang */
+}
+
+    .nav-list::-webkit-scrollbar {
+        display: none;
+    }
+
+.nav-item a {
+    display: block;
+    padding: 10px 15px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.nav-item.active a {
+    color: #a00;
+    border-bottom: 2px solid #a00;
+    padding-bottom: 8px;
+}
+
+.nav-scroll-indicator {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    cursor: pointer;
+    border-left: 1px solid #eee;
+    font-size: 18px;
+    color: #666;
+    z-index: 10;
+}
+
+/* --- 3. BỐ CỤC NỘI DUNG CHÍNH (TIN TỨC) --- */
+.featured-story {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.story-image {
+    flex: 0 0 55%;
+}
+
+    .story-image img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+.story-content {
+    flex: 1;
+}
+
+.story-title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #a00;
+    margin-top: 0;
+}
+
+.story-sapo {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    margin: 10px 0;
+}
+
+.sub-stories-grid {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.sub-story-item {
+    flex: 1;
+}
+
+    .sub-story-item img {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .sub-story-item h3 {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.4;
+        color: #a00;
+    }
+
+.goc-nhin {
+    border: 1px solid #eee;
+    padding: 15px;
+}
+
+    .goc-nhin h4 {
+        font-size: 12px;
+        color: #666;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+    }
+
+    .goc-nhin h3 {
+        color: #222;
+        font-weight: 700;
+    }
+
+/* ==================================================================== */
+/* MEDIA QUERIES (RESPONSIVE)                  */
+/* ==================================================================== */
+@media (max-width: 900px) {
+    .info-bar .date-time,
+    .info-bar .auth-links {
+        display: none;
+    }
+
+    .info-bar {
+        gap: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        padding: 10px;
+    }
+
+    .featured-story {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .story-title {
+        font-size: 22px;
+    }
+
+    .sub-stories-grid {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .top-bar-container {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-bottom: 0;
+    }
+
+    .info-bar {
+        width: 100%;
+        justify-content: flex-end;
+        padding-top: 5px;
+    }
+}
+
+/* ==================================================================== */
+/* SOCIAL ICONS STYLES */
+/* ==================================================================== */
+
+.footer-links .social-icons {
+    /* Đảm bảo các icon nằm ngang */
+    display: inline-flex;
+    gap: 10px; /* Khoảng cách giữa các icon */
+    margin-left: 5px;
+}
+
+    .footer-links .social-icons a {
+        color: #888; /* Màu xám nhạt mặc định */
+        font-size: 16px; /* Kích thước icon */
+        padding: 0; /* Loại bỏ padding cũ của liên kết */
+        border: none;
+        transition: color 0.2s; /* Hiệu ứng chuyển màu mượt mà */
+    }
+
+        .footer-links .social-icons a:hover {
+            color: #444; /* Màu đậm hơn khi di chuột */
+        }
+
+/* ==================================================================== */
+/* KHỐI CẬP NHẬT: CHI TIẾT BÀI VIẾT (DETAIL PAGE) */
+/* ==================================================================== */
+.detail-container {
+    /* Khung chứa bài viết chỉ rộng 800px */
+    width: 800px !important; /* Dùng !important cho cả khung chứa để chắc chắn ghi đè 1000px của .content-container */
+    max-width: 95%;
+    margin: 0 auto;
+    padding-top: 20px;
+}
+
+    /* KHỐI CẦN THIẾT NHẤT: Bắt buộc hình ảnh co lại */
+    .detail-container .main-image-detail {
+        /* Áp dụng 100% chiều rộng của khung 800px */
+        width: 100% !important;
+        /* Đảm bảo chiều rộng tối đa không vượt quá 100% */
+        max-width: 100% !important;
+        height: auto;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    /* Các style khác cho trang detail */
+    .detail-container h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #333;
+        line-height: 1.3;
+    }
+
+    .detail-container .meta-info {
+        font-size: 14px;
+        color: #888;
+        border-bottom: 1px dotted #ccc;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .detail-container .sapo-detail {
+        font-size: 18px;
+        font-weight: 500;
+        color: #a00;
+        margin-bottom: 25px;
+    }
+
+    .detail-container .article-content p {
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+        text-align: justify;
+    }

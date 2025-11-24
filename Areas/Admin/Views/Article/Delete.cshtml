@@ -1,0 +1,50 @@
+﻿@model WebTinTuc.Article
+
+@{
+    ViewBag.Title = "Xóa bài viết";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid mt-4">
+
+    <!-- [QUAN TRỌNG] PHẦN HIỂN THỊ LỖI -->
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger shadow-sm border-left-danger" role="alert">
+            <h4 class="alert-heading font-weight-bold"><i class="fa fa-times-circle"></i> Xóa thất bại!</h4>
+            <p class="mb-0">
+                @Html.Raw(ViewBag.Error)
+            </p>
+        </div>
+    }
+
+    <!-- Cảnh báo xác nhận -->
+    <div class="alert alert-warning shadow-sm" role="alert">
+        <h4 class="alert-heading font-weight-bold"><i class="fa fa-exclamation-triangle"></i> Cảnh báo!</h4>
+        <p class="mb-0">Bạn có chắc chắn muốn xóa bài báo: <strong>"@Model.Title"</strong> không?</p>
+        <p class="text-danger mb-0">Hành động này sẽ xóa vĩnh viễn bài viết và <strong>toàn bộ bình luận</strong> liên quan.</p>
+    </div>
+
+    <!-- Thông tin bài viết -->
+    @Html.Partial("PVArticleInfo", Model)
+
+    <!-- Form xác nhận xóa -->
+    <div class="card mt-3 border-danger shadow-sm">
+        <div class="card-body text-center bg-white">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="form-actions no-color">
+                    <button type="submit" class="btn btn-danger btn-lg px-5 font-weight-bold shadow">
+                        <i class="fa fa-trash"></i> XÁC NHẬN XÓA
+                    </button>
+
+                    <a href="@Url.Action("Index")" class="btn btn-secondary btn-lg ml-3 px-4">
+                        <i class="fa fa-arrow-left"></i> Hủy bỏ
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

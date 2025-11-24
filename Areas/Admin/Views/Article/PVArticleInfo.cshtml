@@ -1,0 +1,49 @@
+﻿@model WebTinTuc.Article
+
+<div class="container-fluid py-3">
+    <div class="card shadow-lg border-0">
+        <div class="card-body">
+            <div class="row">
+                <!-- Cột trái: Hình ảnh -->
+                <div class="col-md-4 text-center mb-3 mb-md-0">
+                    <div class="p-2 border rounded bg-light">
+                        <!-- Thêm kiểm tra Null cho ImageURL để tránh lỗi nếu ảnh chưa có -->
+                        <img src="@(string.IsNullOrEmpty(Model.ImageURL) ? "https://via.placeholder.com/300x200?text=No+Image" : Model.ImageURL)"
+                             class="img-fluid rounded shadow-sm"
+                             style="max-height: 300px; width: auto;"
+                             alt="Hình ảnh bài viết"
+                             onerror="this.src='https://via.placeholder.com/300x200?text=No+Image'" />
+                    </div>
+                    <div class="mt-3">
+                        <span class="badge badge-secondary p-2">ID: @Model.ArticleID</span>
+                        <!-- Kiểm tra Null cho Topic để tránh lỗi nếu bài viết mất danh mục -->
+                        <span class="badge badge-info p-2">@(Model.Topic != null ? Model.Topic.TopicName : "Chưa phân loại")</span>
+                    </div>
+                </div>
+
+                <!-- Cột phải: Thông tin -->
+                <div class="col-md-8">
+                    <h2 class="text-primary font-weight-bold">@Html.DisplayFor(model => model.Title)</h2>
+
+                    <div class="text-muted mb-3 border-bottom pb-2">
+                        <small>
+                            <!-- ĐOẠN CODE ĐÃ SỬA LỖI -->
+                            Ngày đăng: <strong>@(Model.PublishDate != DateTime.MinValue ? Model.PublishDate.ToString("dd/MM/yyyy HH:mm") : "Chưa cập nhật")</strong>
+                            | Tác giả ID: <strong>@Model.AuthorID</strong>
+                            | Lượt xem: <strong>@Model.ViewCount</strong>
+                        </small>
+                    </div>
+
+                    <div class="article-content text-justify">
+                        <h5 class="font-weight-bold text-dark">Nội dung tóm tắt:</h5>
+                        <p class="lead" style="font-size: 1rem; white-space: pre-line;">
+                            @Html.DisplayFor(model => model.Content)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nút bấm ở Partial View này chỉ dùng cho trang Details, trang Delete sẽ tự có nút riêng -->
+    </div>
+</div>

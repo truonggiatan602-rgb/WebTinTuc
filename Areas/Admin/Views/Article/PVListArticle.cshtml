@@ -1,0 +1,100 @@
+﻿@model WebTinTuc.Models.ViewModel.ArticleSearchVM
+@using PagedList.Mvc
+
+<!-- CSS riêng cho phần phân trang để đẹp hơn -->
+<style>
+    .article-thumb {
+        width: 80px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+    }
+
+    .pagination-container ul {
+        display: flex;
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .pagination-container li {
+        margin-right: 5px;
+    }
+
+        .pagination-container li a, .pagination-container li span {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            color: #333;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+    .pagination-container .active span {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+</style>
+
+@if (Model.Articles != null && Model.Articles.Any())
+{
+    <div class="card shadow-sm">
+        <div class="card-header bg-white d-flex justify-content-between align-items-center py-3">
+            <h5 class="m-0 font-weight-bold text-primary">Danh sách bài báo (@Model.Articles.TotalItemCount bài)</h5>
+            @Html.ActionLink("+ Thêm bài mới", "Create", null, new { @class = "btn btn-success btn-sm shadow-sm font-weight-bold" })
+        </div>
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover table-striped mb-0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-center" width="100">Hình ảnh</th>
+                            <th>Tên bài báo</th>
+                            <th width="150">Danh mục</th>
+                            <th width="200" class="text-center">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Articles)
+                        {
+                            <tr>
+                                <td class="text-center align-middle">
+                                    <!-- Xử lý ảnh lỗi nếu link chết -->
+                                    <img src="@Html.DisplayFor(modelItem => item.ImageURL)"
+                                         class="article-thumb"
+                                         onerror="this.src='https://via.placeholder.com/80x60?text=No+Image'" />
+                                </td>
+                                <td class="align-middle font-weight-bold text-dark">
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </td>
+                                <td class="align-middle">
+                                    <span class="badge badge-info p-2">@Html.DisplayFor(modelItem => item.Topic.TopicName)</span>
+                                </td>
+                                <td class="align-middle text-center">
+                                    <div class="btn-group" role="group">
+                                        @Html.ActionLink("Sửa", "Edit", new { id = item.ArticleID }, new { @class = "btn btn-outline-primary btn-sm" })
+                                        @Html.ActionLink("Xem", "Details", new { id = item.ArticleID }, new { @class = "btn btn-outline-info btn-sm" })
+                                        @Html.ActionLink("Xoá", "Delete", new { id = item.ArticleID }, new { @class = "btn btn-outline-danger btn-sm" })
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card-footer bg-white d-flex justify-content-center">
+            <div class="pagination-container">
+                @Html.PagedListPager(Model.Articles, page => Url.Action("Index", new { page, searchTerm = Model.SearchTerm, sortOrder = Model.sortOrder }))
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning text-center mt-3" role="alert">
+        <strong>Thông báo:</strong> Không tìm thấy bài báo nào phù hợp với từ khóa của bạn.
+    </div>
+}

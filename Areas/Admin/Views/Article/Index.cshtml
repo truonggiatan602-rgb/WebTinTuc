@@ -1,0 +1,44 @@
+﻿@model WebTinTuc.Models.ViewModel.ArticleSearchVM
+
+
+@{
+    ViewBag.Title = "Search Product";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Search</title>
+    <style>
+        .search-container, .order.search-container {
+            padding-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("Index", "Article", FormMethod.Get))
+            {
+                <div class="form-group search-container">
+                    @Html.TextBoxFor(m => m.SearchTerm, new
+               {
+                   @class = "form-control",
+                   placeholder = "Nhập tên hoặc nội dung bài báo"
+               })
+
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+
+                <div class="form-group order-container">
+                    Sắp xếp theo:
+                    @Html.ActionLink("A-Z", "Index", new { sortOrder = "name_asc", searchTerm = Model.SearchTerm }) |
+                    @Html.ActionLink("Z-A", "Index", new { sortOrder = "name_desc", searchTerm = Model.SearchTerm }) |
+                </div>
+            }
+
+    @Html.Partial("PVListArticle")
+</body>
+</html>

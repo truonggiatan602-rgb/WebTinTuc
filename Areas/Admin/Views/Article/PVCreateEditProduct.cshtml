@@ -1,0 +1,79 @@
+﻿@model WebTinTuc.Article
+
+<div class="card shadow-sm border-0">
+    <div class="card-body">
+
+        <!-- Hàng 1: Danh mục & Tiêu đề -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label class="font-weight-bold text-secondary">Danh mục bài viết</label>
+                    @Html.DropDownList("TopicID", null, htmlAttributes: new { @class = "form-control custom-select" })
+                    @Html.ValidationMessageFor(model => model.TopicID, "", new { @class = "text-danger small" })
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="font-weight-bold text-secondary">Tiêu đề bài báo</label>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @placeholder = "Nhập tiêu đề hấp dẫn..." } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger small" })
+                </div>
+            </div>
+        </div>
+
+        <!-- Hàng 2: Hình ảnh & Preview -->
+        <div class="row mt-3">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <label class="font-weight-bold text-secondary">Link hình ảnh (URL)</label>
+                    <!-- Thêm sự kiện onchange để xem trước ảnh -->
+                    @Html.EditorFor(model => model.ImageURL, new { htmlAttributes = new { @class = "form-control", @placeholder = "https://...", @id = "imgUrlInput", @oninput = "previewImage(this.value)" } })
+                    @Html.ValidationMessageFor(model => model.ImageURL, "", new { @class = "text-danger small" })
+                    <small class="text-muted">Dán link ảnh vào đây để xem trước bên cạnh.</small>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-2 border rounded bg-light">
+                    <img id="imgPreview" src="@(Model != null ? Model.ImageURL : "")"
+                         style="max-height: 100px; max-width: 100%; display: @(Model != null && Model.ImageURL != null ? "block" : "none");"
+                         alt="Xem trước ảnh"
+                         onerror="this.style.display='none'" />
+                    <span id="imgPlaceholder" class="text-muted small" style="display: @(Model != null && Model.ImageURL != null ? "none" : "block");">Chưa có ảnh</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hàng 3: Nội dung chi tiết -->
+        <div class="form-group mt-3">
+            <label class="font-weight-bold text-secondary">Nội dung chi tiết</label>
+            @Html.TextAreaFor(model => model.Content, new { @class = "form-control", @rows = "8", @placeholder = "Viết nội dung bài báo ở đây..." })
+            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger small" })
+        </div>
+
+        <!-- Nút bấm -->
+        <div class="form-group mt-4 text-right">
+            <a href="@Url.Action("Index")" class="btn btn-secondary mr-2">
+                Quay lại danh sách
+            </a>
+            <button type="submit" class="btn btn-primary px-4 font-weight-bold">
+                <i class="fa fa-save"></i> Lưu Bài Viết
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Script nhỏ để preview ảnh ngay lập tức -->
+<script>
+    function previewImage(url) {
+        var img = document.getElementById('imgPreview');
+        var placeholder = document.getElementById('imgPlaceholder');
+        if (url && url.trim() !== "") {
+            img.src = url;
+            img.style.display = 'block';
+            placeholder.style.display = 'none';
+        } else {
+            img.style.display = 'none';
+            placeholder.style.display = 'block';
+        }
+    }
+</script>

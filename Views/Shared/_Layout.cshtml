@@ -3,37 +3,114 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
+    <title>@ViewBag.Title - Báo Đời Sống</title>
+
+    <!-- Link CSS trực tiếp -->
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/bootstrap.css")" rel="stylesheet" type="text/css" />
+
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        .nav-item a {
+            text-decoration: none;
+            display: block;
+            padding: 10px 15px;
+        }
+
+        .auth-links a {
+            text-decoration: none;
+            color: #666;
+            transition: 0.2s;
+        }
+
+            .auth-links a:hover {
+                color: #a00;
+            }
+
+        .admin-badge {
+            background-color: #a00;
+            color: white !important;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 11px;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
-        <div class="container">
-            @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
-                <ul class="navbar-nav flex-grow-1">
-                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
-                </ul>
+    <header class="main-header">
+        <div class="top-bar-container">
+            <div class="logo">
+                <a href="@Url.Action("Index", "Home", new { area = "" })" class="logo-link">
+                    <span class="logo-text">BÁO<span class="red"> ĐỜI SỐNG</span></span>
+                    <p class="tagline">Nhiều Thông Tin Bổ Ích Cho Đời Sống</p>
+                </a>
+            </div>
+            <div class="info-bar">
+                <span class="info-item date-time">@DateTime.Now.ToString("dddd, dd/MM/yyyy")</span>
+                <span class="info-item auth-links">
+                    @if (Session["User"] == null)
+                    {
+                        <i class="fa fa-user-circle"></i>
+                        @Html.ActionLink("Đăng nhập / Đăng kí", "Login", "Account", new { area = "" }, new { @style = "font-weight:bold" })
+                    }
+                    else
+                    {
+                        <span style="color: #333; font-weight: 500;">Xin chào, @(Session["FullName"] != null ? Session["FullName"] : Session["Username"])</span>
+                        if (Session["UserRole"] != null && (Session["UserRole"].ToString() == "Admin" || Session["UserRole"].ToString() == "A"))
+                        {
+                            <a href="@Url.Action("Index", "Article", new { area = "Admin" })" class="admin-badge"><i class="fa fa-cogs"></i> Quản Trị</a>
+                        }
+                        <span style="margin: 0 5px; color: #ccc;">|</span>
+                        @Html.ActionLink("Đăng xuất", "Logout", "Account", new { area = "" }, null)
+                    }
+                </span>
             </div>
         </div>
-    </nav>
+        <div class="main-nav-bar-wrapper">
+            <nav class="main-nav-bar">
+                <ul class="nav-list" id="navList">
+                    <li class="nav-item home-icon"><a href="@Url.Action("Index", "Home", new { area = "" })"><i class="fa fa-home"></i> Trang chủ</a></li>
+                    <li class="nav-item">@Html.ActionLink("Thể thao", "Category/1", "Home", new { area = "" }, null)</li>
+                    <li class="nav-item">@Html.ActionLink("Du lịch", "Category/2", "Home", new { area = "" }, null)</li>
+                    <li class="nav-item">@Html.ActionLink("Khoa học - Công nghệ", "Category/3", "Home", new { area = "" }, null)</li>
+                    <li class="nav-item">@Html.ActionLink("Đời sống", "Category/4", "Home", new { area = "" }, null)</li>
+                    <li class="nav-item">@Html.ActionLink("Thời sự", "Category/5", "Home", new { area = "" }, null)</li>
+                    <li class="nav-item">@Html.ActionLink("Tiện ích", "Category/6", "Home", new { area = "" }, null)</li>
+                </ul>
+                <div class="nav-scroll-indicator" id="navScrollRight"><span>&gt;</span></div>
+            </nav>
+        </div>
+    </header>
+
     <div class="container body-content">
+        @* --- ĐÂY LÀ CHỖ DUY NHẤT CÓ RenderBody --- *@
         @RenderBody()
+
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <div class="footer-container">
+                <div class="footer-top-bar">
+                    <div class="footer-logo">
+                        Báo Điện Tử  | <span class="logo-text">BÁO<span class="red"> ĐỜI SỐNG</span></span>
+                    </div>
+                </div>
+                <hr class="footer-hr" style="border-top: 1px solid #ddd; margin: 10px 0;">
+                <div class="footer-info" style="display: flex; justify-content: space-between; font-size: 13px; color: #666;">
+                    <div class="info-column"><p><strong>BÁO ĐỜI SỐNG – Tin nhanh, chuẩn xác.</strong></p></div>
+                    <div class="info-column"><p>Tổng biên tập: Nguyên, Tân, Sang</p></div>
+                    <div class="info-column"><p>&copy; @DateTime.Now.Year - Báo Đời Sống</p></div>
+                </div>
+            </div>
         </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script>document.getElementById('navScrollRight')?.addEventListener('click', function () { document.getElementById('navList').scrollBy({ left: 100, behavior: 'smooth' }); });</script>
     @RenderSection("scripts", required: false)
 </body>
 </html>
